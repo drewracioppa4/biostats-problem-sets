@@ -1,0 +1,86 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is Problem Set 2 for Biostats Fall of 2022. I am establishing data analysis of Halloween Data.
+
+
+As usual we clear everything and add our packages
+```{r}
+rm (list = ls())
+library(dplyr)
+library(ggplot2)
+library(here)
+```
+
+Importing Data
+#Adding stringsAsFactors = TRUE to change strings to factors and glimpse to double check
+```{r}
+DF <- read.csv(here("Data", "Halloween_data_PS2.csv"), stringsAsFactors = TRUE)
+glimpse(DF)
+```
+
+Just looking at the Data Summary, Column Names, and Data Structure
+```{r}
+str(DF)
+summary(DF)
+colnames(DF)
+```
+
+#Fixing up some of the Data by turning everything lowercase and then stripped the white space using the mutate function
+```{r}
+DF <- DF %>%
+  mutate(Costume = tolower(Costume), Type = tolower(Type))
+DF <- DF %>% 
+  mutate(Costume = trimws(Costume), Type = trimws(Type))
+View(DF)
+```
+
+Here we delete the Data Rows 4, 12, 29, and 30, because of a lack of data from their dataset
+```{r}
+DF <- DF[-c(4,12,29,30),]
+View(DF)
+```
+
+#Finding mean of age of trick-or-treaters and the mean number of pieces of candy taken broken down by Costume and Type for figure one
+```{r}
+Plot.DF <- DF %>% group_by(Costume, Type) %>% summarize(mean_age = mean(age), mean_candy = mean(candy_pieces))
+
+print(Plot.DF)
+```
+
+
+Figure 1. Mean number of pieces of candy taken as a function of age of trick-or-treater and costume type 
+
+```{r}
+ggplot( Plot.DF, aes(x = mean_age, y = mean_candy, colour = Type)) +
+  geom_point()+
+xlab("Mean age of kids (years)")+
+ylab("Mean number of pieces taken")+
+theme_bw()
+```
+
+
+#code that isolates the data for children in “not scary” costumes who are 10 years old or younger and use the resulting data to plot a histogram showing the number of kids in each age class
+
+```{r}
+Plot.DF2 <- DF %>% filter(Type == "not scary" & age <= 10) 
+```
+
+Figure 2. Number of children age 10 and under wearing costumes that are not scary. 
+
+```{r}
+ggplot(Plot.DF2, aes(x = age))+
+geom_histogram(bins = 4)
+```
+
+Figure 3. Box and whisker plot showing the age distribution of children wearing different Halloween costume choices, separated according to whether the costume is scary or not
+
+```{r}
+ggplot(DF, aes(x = Costume, y = age))+
+  geom_boxplot()+ 
+  facet_wrap(~Type)+
+  coord_flip()
+```
+
