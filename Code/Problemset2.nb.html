@@ -219,7 +219,7 @@ pre code {
 
 
 <!-- rnb-text-begin -->
-<p>This is Problem Set 2 for Biostats Fall of 2022</p>
+<p>This is Problem Set 2 for Biostats Fall of 2022. I am establishing data analysis of Halloween Data.</p>
 <p>As usual we clear everything and add our packages</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -231,25 +231,16 @@ library(here)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="importing-data-using-here-package" class="section level2">
-<h2>Importing Data using here package</h2>
+<p>Importing Data #Adding stringsAsFactors = TRUE to change strings to factors and glimpse to double check</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuREYgPC0gcmVhZC5jc3YoaGVyZShcIkRhdGFcIiwgXCJIYWxsb3dlZW5fZGF0YV9QUzIuY3N2XCIpLCBzdHJpbmdzQXNGYWN0b3JzID0gVFJVRSlcbmdsaW1wc2UoREYpXG5gYGAifQ== -->
 <pre class="r"><code>DF &lt;- read.csv(here(&quot;Data&quot;, &quot;Halloween_data_PS2.csv&quot;), stringsAsFactors = TRUE)
 glimpse(DF)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNDZcbkNvbHVtbnM6IDRcbiQgQ29zdHVtZSAgICAgIDxmY3Q+IHdvbmRlciB3b21hbiwgd29uZGVyIHdvbWFuLCBXb25kZXIgV29tYW4sIFdvbmRlciB3b21hbiwgd29uZGVyIHdvbWFuLCB3b25kZXIgd29tYW4sIFdvbmRlciDigKZcbiQgVHlwZSAgICAgICAgIDxmY3Q+IE5vdCBzY2FyeSwgTm90IHNjYXJ5LCBOb3Qgc2NhcnksIE5vdCBzY2FyeSwgTm90IHNjYXJ5LCBOb3Qgc2NhcnksIE5vdCBzY2FyeSwgTm90IHNjYXJ5LCBTY2HigKZcbiQgY2FuZHlfcGllY2VzIDxpbnQ+IDIsIDEsIDEsIDMsIDIsIDEsIDEsIDEsIDQsIDMsIDQsIE5BLCAzLCAxLCAxLCAxLCAxLCAyLCAxLCAxLCAyLCAzLCAyLCAyLCA1LCA0LCA0LCAzLCAzLCBOQSzigKZcbiQgYWdlICAgICAgICAgIDxpbnQ+IDgsIDksIDEwLCBOQSwgOCwgOSwgMTAsIDEwLCAxNCwgMTMsIDEyLCAxNCwgMTMsIDcsIDgsIDYsIDcsIDgsIDUsIDQsIDQsIDYsIDUsIDYsIDUsIDksIDgsIDHigKZcbiJ9 -->
-<pre><code>Rows: 46
-Columns: 4
-$ Costume      &lt;fct&gt; wonder woman, wonder woman, Wonder Woman, Wonder woman, wonder woman, wonder woman, Wonder …
-$ Type         &lt;fct&gt; Not scary, Not scary, Not scary, Not scary, Not scary, Not scary, Not scary, Not scary, Sca…
-$ candy_pieces &lt;int&gt; 2, 1, 1, 3, 2, 1, 1, 1, 4, 3, 4, NA, 3, 1, 1, 1, 1, 2, 1, 1, 2, 3, 2, 2, 5, 4, 4, 3, 3, NA,…
-$ age          &lt;int&gt; 8, 9, 10, NA, 8, 9, 10, 10, 14, 13, 12, 14, 13, 7, 8, 6, 7, 8, 5, 4, 4, 6, 5, 6, 5, 9, 8, 1…</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Structure, Summary, and Col Names of Data</p>
+<p>Just looking at the Data Summary, Column Names, and Data Structure</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKERGKVxuc3VtbWFyeShERilcbmNvbG5hbWVzKERGKVxuYGBgIn0= -->
@@ -259,7 +250,7 @@ colnames(DF)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Fixing up some of the Data by turning everything lowercase and then stripped the white space</p>
+<p>#Fixing up some of the Data by turning everything lowercase and then stripped the white space using the mutate function</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuREYgPC0gREYgJT4lXG4gIG11dGF0ZShDb3N0dW1lID0gdG9sb3dlcihDb3N0dW1lKSwgVHlwZSA9IHRvbG93ZXIoVHlwZSkpXG5ERiA8LSBERiAlPiUgXG4gIG11dGF0ZShDb3N0dW1lID0gdHJpbXdzKENvc3R1bWUpLCBUeXBlID0gdHJpbXdzKFR5cGUpKVxuVmlldyhERilcbmBgYCJ9 -->
@@ -271,7 +262,7 @@ View(DF)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Deleting rows of Data without data</p>
+<p>Here we delete the Data Rows 4, 12, 29, and 30, because of a lack of data from their dataset</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuREYgPC0gREZbLWMoNCwxMiwyOSwzMCksXVxuVmlldyhERilcbmBgYCJ9 -->
@@ -280,22 +271,59 @@ View(DF)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Finding mean of age of trick-or-treaters and the mean number of pieces of candy taken broken down by Costume and Type</p>
+<p>#Finding mean of age of trick-or-treaters and the mean number of pieces of candy taken broken down by Costume and Type for figure one</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuREYgJT4lIGdyb3VwX2J5KENvc3R1bWUsIFR5cGUpICU+JSBzdW1tYXJpemUobWVhbl9hZ2UgPSBtZWFuKGFnZSksIG1lYW5fY2FuZHkgPSBtZWFuKGNhbmR5X3BpZWNlcykpXG5gYGAifQ== -->
-<pre class="r"><code>DF %&gt;% group_by(Costume, Type) %&gt;% summarize(mean_age = mean(age), mean_candy = mean(candy_pieces))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUGxvdC5ERiA8LSBERiAlPiUgZ3JvdXBfYnkoQ29zdHVtZSwgVHlwZSkgJT4lIHN1bW1hcml6ZShtZWFuX2FnZSA9IG1lYW4oYWdlKSwgbWVhbl9jYW5keSA9IG1lYW4oY2FuZHlfcGllY2VzKSlcblxucHJpbnQoUGxvdC5ERilcbmBgYCJ9 -->
+<pre class="r"><code>Plot.DF &lt;- DF %&gt;% group_by(Costume, Type) %&gt;% summarize(mean_age = mean(age), mean_candy = mean(candy_pieces))
+
+print(Plot.DF)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Figure 1. Mean number of pieces of candy taken as a function of age of trick-or-treater and costume type</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KCBQbG90LkRGLCBhZXMoeCA9IG1lYW5fYWdlLCB5ID0gbWVhbl9jYW5keSwgY29sb3VyID0gVHlwZSkpICtcbiAgZ2VvbV9wb2ludCgpK1xueGxhYihcIk1lYW4gYWdlIG9mIGtpZHMgKHllYXJzKVwiKStcbnlsYWIoXCJNZWFuIG51bWJlciBvZiBwaWVjZXMgdGFrZW5cIikrXG50aGVtZV9idygpXG5gYGAifQ== -->
+<pre class="r"><code>ggplot( Plot.DF, aes(x = mean_age, y = mean_candy, colour = Type)) +
+  geom_point()+
+xlab(&quot;Mean age of kids (years)&quot;)+
+ylab(&quot;Mean number of pieces taken&quot;)+
+theme_bw()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#code that isolates the data for children in “not scary” costumes who are 10 years old or younger and use the resulting data to plot a histogram showing the number of kids in each age class</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUGxvdC5ERjIgPC0gREYgJT4lIGZpbHRlcihUeXBlID09IFwibm90IHNjYXJ5XCIgJiBhZ2UgPD0gMTApXG5gYGAifQ== -->
+<pre class="r"><code>Plot.DF2 &lt;- DF %&gt;% filter(Type == &quot;not scary&quot; &amp; age &lt;= 10)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Figure 2. Number of children age 10 and under wearing costumes that are not scary.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KFBsb3QuREYyLCBhZXMoeCA9IGFnZSkpK1xuZ2VvbV9oaXN0b2dyYW0oYmlucyA9IDQpXG5gYGAifQ== -->
+<pre class="r"><code>ggplot(Plot.DF2, aes(x = age))+
+geom_histogram(bins = 4)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Figure 3. Box and whisker plot showing the age distribution of children wearing different Halloween costume choices, separated according to whether the costume is scary or not</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KERGLCBhZXMoeCA9IENvc3R1bWUsIHkgPSBhZ2UpKStcbiAgZ2VvbV9ib3hwbG90KCkrIFxuICBmYWNldF93cmFwKH5UeXBlKStcbiAgY29vcmRfZmxpcCgpXG5gYGAifQ== -->
+<pre class="r"><code>ggplot(DF, aes(x = Costume, y = age))+
+  geom_boxplot()+ 
+  facet_wrap(~Type)+
+  coord_flip()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBQcm9ibGVtIFNldCAyIGZvciBCaW9zdGF0cyBGYWxsIG9mIDIwMjIKCgpBcyB1c3VhbCB3ZSBjbGVhciBldmVyeXRoaW5nIGFuZCBhZGQgb3VyIHBhY2thZ2VzCmBgYHtyfQpybSAobGlzdCA9IGxzKCkpCmxpYnJhcnkoZHBseXIpCmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeShoZXJlKQpgYGAKCiMjIEltcG9ydGluZyBEYXRhIHVzaW5nIGhlcmUgcGFja2FnZQpgYGB7cn0KREYgPC0gcmVhZC5jc3YoaGVyZSgiRGF0YSIsICJIYWxsb3dlZW5fZGF0YV9QUzIuY3N2IiksIHN0cmluZ3NBc0ZhY3RvcnMgPSBUUlVFKQpnbGltcHNlKERGKQpgYGAKCiNTdHJ1Y3R1cmUsIFN1bW1hcnksIGFuZCBDb2wgTmFtZXMgb2YgRGF0YQpgYGB7cn0Kc3RyKERGKQpzdW1tYXJ5KERGKQpjb2xuYW1lcyhERikKYGBgCgojRml4aW5nIHVwIHNvbWUgb2YgdGhlIERhdGEgYnkgdHVybmluZyBldmVyeXRoaW5nIGxvd2VyY2FzZSBhbmQgdGhlbiBzdHJpcHBlZCB0aGUgd2hpdGUgc3BhY2UKYGBge3J9CkRGIDwtIERGICU+JQogIG11dGF0ZShDb3N0dW1lID0gdG9sb3dlcihDb3N0dW1lKSwgVHlwZSA9IHRvbG93ZXIoVHlwZSkpCkRGIDwtIERGICU+JSAKICBtdXRhdGUoQ29zdHVtZSA9IHRyaW13cyhDb3N0dW1lKSwgVHlwZSA9IHRyaW13cyhUeXBlKSkKVmlldyhERikKYGBgCgojRGVsZXRpbmcgcm93cyBvZiBEYXRhIHdpdGhvdXQgZGF0YQpgYGB7cn0KREYgPC0gREZbLWMoNCwxMiwyOSwzMCksXQpWaWV3KERGKQpgYGAKCiNGaW5kaW5nIG1lYW4gb2YgYWdlIG9mIHRyaWNrLW9yLXRyZWF0ZXJzIGFuZCB0aGUgbWVhbiBudW1iZXIgb2YgcGllY2VzIG9mIGNhbmR5IHRha2VuIGJyb2tlbiBkb3duIGJ5IENvc3R1bWUgYW5kIFR5cGUKYGBge3J9CkRGICU+JSBncm91cF9ieShDb3N0dW1lLCBUeXBlKSAlPiUgc3VtbWFyaXplKG1lYW5fYWdlID0gbWVhbihhZ2UpLCBtZWFuX2NhbmR5ID0gbWVhbihjYW5keV9waWVjZXMpKQpgYGAKCmBgYHtyfQoKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBQcm9ibGVtIFNldCAyIGZvciBCaW9zdGF0cyBGYWxsIG9mIDIwMjIuIEkgYW0gZXN0YWJsaXNoaW5nIGRhdGEgYW5hbHlzaXMgb2YgSGFsbG93ZWVuIERhdGEuCgoKQXMgdXN1YWwgd2UgY2xlYXIgZXZlcnl0aGluZyBhbmQgYWRkIG91ciBwYWNrYWdlcwpgYGB7cn0Kcm0gKGxpc3QgPSBscygpKQpsaWJyYXJ5KGRwbHlyKQpsaWJyYXJ5KGdncGxvdDIpCmxpYnJhcnkoaGVyZSkKYGBgCgpJbXBvcnRpbmcgRGF0YQojQWRkaW5nIHN0cmluZ3NBc0ZhY3RvcnMgPSBUUlVFIHRvIGNoYW5nZSBzdHJpbmdzIHRvIGZhY3RvcnMgYW5kIGdsaW1wc2UgdG8gZG91YmxlIGNoZWNrCmBgYHtyfQpERiA8LSByZWFkLmNzdihoZXJlKCJEYXRhIiwgIkhhbGxvd2Vlbl9kYXRhX1BTMi5jc3YiKSwgc3RyaW5nc0FzRmFjdG9ycyA9IFRSVUUpCmdsaW1wc2UoREYpCmBgYAoKSnVzdCBsb29raW5nIGF0IHRoZSBEYXRhIFN1bW1hcnksIENvbHVtbiBOYW1lcywgYW5kIERhdGEgU3RydWN0dXJlCmBgYHtyfQpzdHIoREYpCnN1bW1hcnkoREYpCmNvbG5hbWVzKERGKQpgYGAKCiNGaXhpbmcgdXAgc29tZSBvZiB0aGUgRGF0YSBieSB0dXJuaW5nIGV2ZXJ5dGhpbmcgbG93ZXJjYXNlIGFuZCB0aGVuIHN0cmlwcGVkIHRoZSB3aGl0ZSBzcGFjZSB1c2luZyB0aGUgbXV0YXRlIGZ1bmN0aW9uCmBgYHtyfQpERiA8LSBERiAlPiUKICBtdXRhdGUoQ29zdHVtZSA9IHRvbG93ZXIoQ29zdHVtZSksIFR5cGUgPSB0b2xvd2VyKFR5cGUpKQpERiA8LSBERiAlPiUgCiAgbXV0YXRlKENvc3R1bWUgPSB0cmltd3MoQ29zdHVtZSksIFR5cGUgPSB0cmltd3MoVHlwZSkpClZpZXcoREYpCmBgYAoKSGVyZSB3ZSBkZWxldGUgdGhlIERhdGEgUm93cyA0LCAxMiwgMjksIGFuZCAzMCwgYmVjYXVzZSBvZiBhIGxhY2sgb2YgZGF0YSBmcm9tIHRoZWlyIGRhdGFzZXQKYGBge3J9CkRGIDwtIERGWy1jKDQsMTIsMjksMzApLF0KVmlldyhERikKYGBgCgojRmluZGluZyBtZWFuIG9mIGFnZSBvZiB0cmljay1vci10cmVhdGVycyBhbmQgdGhlIG1lYW4gbnVtYmVyIG9mIHBpZWNlcyBvZiBjYW5keSB0YWtlbiBicm9rZW4gZG93biBieSBDb3N0dW1lIGFuZCBUeXBlIGZvciBmaWd1cmUgb25lCmBgYHtyfQpQbG90LkRGIDwtIERGICU+JSBncm91cF9ieShDb3N0dW1lLCBUeXBlKSAlPiUgc3VtbWFyaXplKG1lYW5fYWdlID0gbWVhbihhZ2UpLCBtZWFuX2NhbmR5ID0gbWVhbihjYW5keV9waWVjZXMpKQoKcHJpbnQoUGxvdC5ERikKYGBgCgoKRmlndXJlIDEuIE1lYW4gbnVtYmVyIG9mIHBpZWNlcyBvZiBjYW5keSB0YWtlbiBhcyBhIGZ1bmN0aW9uIG9mIGFnZSBvZiB0cmljay1vci10cmVhdGVyIGFuZCBjb3N0dW1lIHR5cGUgCgpgYGB7cn0KZ2dwbG90KCBQbG90LkRGLCBhZXMoeCA9IG1lYW5fYWdlLCB5ID0gbWVhbl9jYW5keSwgY29sb3VyID0gVHlwZSkpICsKICBnZW9tX3BvaW50KCkrCnhsYWIoIk1lYW4gYWdlIG9mIGtpZHMgKHllYXJzKSIpKwp5bGFiKCJNZWFuIG51bWJlciBvZiBwaWVjZXMgdGFrZW4iKSsKdGhlbWVfYncoKQpgYGAKCgojY29kZSB0aGF0IGlzb2xhdGVzIHRoZSBkYXRhIGZvciBjaGlsZHJlbiBpbiDigJxub3Qgc2NhcnnigJ0gY29zdHVtZXMgd2hvIGFyZSAxMCB5ZWFycyBvbGQgb3IgeW91bmdlciBhbmQgdXNlIHRoZSByZXN1bHRpbmcgZGF0YSB0byBwbG90IGEgaGlzdG9ncmFtIHNob3dpbmcgdGhlIG51bWJlciBvZiBraWRzIGluIGVhY2ggYWdlIGNsYXNzCgpgYGB7cn0KUGxvdC5ERjIgPC0gREYgJT4lIGZpbHRlcihUeXBlID09ICJub3Qgc2NhcnkiICYgYWdlIDw9IDEwKSAKYGBgCgpGaWd1cmUgMi4gTnVtYmVyIG9mIGNoaWxkcmVuIGFnZSAxMCBhbmQgdW5kZXIgd2VhcmluZyBjb3N0dW1lcyB0aGF0IGFyZSBub3Qgc2NhcnkuIAoKYGBge3J9CmdncGxvdChQbG90LkRGMiwgYWVzKHggPSBhZ2UpKSsKZ2VvbV9oaXN0b2dyYW0oYmlucyA9IDQpCmBgYAoKRmlndXJlIDMuIEJveCBhbmQgd2hpc2tlciBwbG90IHNob3dpbmcgdGhlIGFnZSBkaXN0cmlidXRpb24gb2YgY2hpbGRyZW4gd2VhcmluZyBkaWZmZXJlbnQgSGFsbG93ZWVuIGNvc3R1bWUgY2hvaWNlcywgc2VwYXJhdGVkIGFjY29yZGluZyB0byB3aGV0aGVyIHRoZSBjb3N0dW1lIGlzIHNjYXJ5IG9yIG5vdAoKYGBge3J9CmdncGxvdChERiwgYWVzKHggPSBDb3N0dW1lLCB5ID0gYWdlKSkrCiAgZ2VvbV9ib3hwbG90KCkrIAogIGZhY2V0X3dyYXAoflR5cGUpKwogIGNvb3JkX2ZsaXAoKQpgYGAKCg==</div>
 
 
 
