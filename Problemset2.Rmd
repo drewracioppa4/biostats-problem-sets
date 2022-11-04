@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is Problem Set 2 for Biostats Fall of 2022
+
+
+As usual we clear everything and add our packages
+```{r}
+rm (list = ls())
+library(dplyr)
+library(ggplot2)
+library(here)
+```
+
+## Importing Data using here package
+```{r}
+DF <- read.csv(here("Data", "Halloween_data_PS2.csv"), stringsAsFactors = TRUE)
+glimpse(DF)
+```
+
+#Structure, Summary, and Col Names of Data
+```{r}
+str(DF)
+summary(DF)
+colnames(DF)
+```
+
+#Fixing up some of the Data by turning everything lowercase and then stripped the white space
+```{r}
+DF <- DF %>%
+  mutate(Costume = tolower(Costume), Type = tolower(Type))
+DF <- DF %>% 
+  mutate(Costume = trimws(Costume), Type = trimws(Type))
+View(DF)
+```
+
+#Deleting rows of Data without data
+```{r}
+DF <- DF[-c(4,12,29,30),]
+View(DF)
+```
+
+#Finding mean of age of trick-or-treaters and the mean number of pieces of candy taken broken down by Costume and Type
+```{r}
+DF %>% group_by(Costume, Type) %>% summarize(mean_age = mean(age), mean_candy = mean(candy_pieces))
+```
+
+```{r}
+
+```
+
