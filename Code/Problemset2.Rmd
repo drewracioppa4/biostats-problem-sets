@@ -42,6 +42,7 @@ Here we delete the Data Rows 4, 12, 29, and 30, because of a lack of data from t
 DF <- DF[-c(4,12,29,30),]
 View(DF)
 ```
+It was a bad choice to delete these rows because you are throwing away data. For instance, row 4 has data for everything except age so why get rid of all of the other information?
 
 #Finding mean of age of trick-or-treaters and the mean number of pieces of candy taken broken down by Costume and Type for figure one
 ```{r}
@@ -49,6 +50,9 @@ Plot.DF <- DF %>% group_by(Costume, Type) %>% summarize(mean_age = mean(age), me
 
 print(Plot.DF)
 ```
+I'm not sure what the `print(Plot.DF)` line is for
+
+Also, you are now missing observations because of deleting them from the data frame. If you had kept them, you would simply need to add `na.rm =T` inside of your summarise statement for both means and it would work just fine. See key for details.
 
 
 Figure 1. Mean number of pieces of candy taken as a function of age of trick-or-treater and costume type 
@@ -67,6 +71,7 @@ theme_bw()
 ```{r}
 Plot.DF2 <- DF %>% filter(Type == "not scary" & age <= 10) 
 ```
+The filter to create Plot.DF2 didn't work because there are no cases in DF where "not scary" is spelled with all lowercase so R returns an empty dataframe.
 
 Figure 2. Number of children age 10 and under wearing costumes that are not scary. 
 
